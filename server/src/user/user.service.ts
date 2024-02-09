@@ -26,7 +26,6 @@ export class UserService {
     newUser.password = await hash(dto.password, 10);
 
     const savedUser = await this.userRepository.save(newUser);
-    // You may want to omit the password here before returning the user object
     return savedUser;
   }
 

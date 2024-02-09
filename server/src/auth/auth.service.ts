@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { LoginDto } from './dto/auth.dto';
-import { UserService } from 'src/module/user/user.service';
+import { UserService } from 'src/user/user.service';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -37,6 +37,7 @@ export class AuthService {
       },
     };
   }
+
 
   async validateUser(dto: LoginDto) {
     const user = await this.userService.findByEmail(dto.email);

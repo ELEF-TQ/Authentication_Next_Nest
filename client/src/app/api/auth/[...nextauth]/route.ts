@@ -32,19 +32,14 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "jsmith",
-        },
+        email: {label: "Email",type: "email", placeholder: "email",},
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        if (!credentials?.username || !credentials?.password) return null;
+        if (!credentials?.email || !credentials?.password) return null;
 
         try {
           const res = await api.post("/auth/login", credentials);
-
           if (res.status === 401) {
             console.log(res.statusText);
             return null;

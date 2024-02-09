@@ -22,6 +22,7 @@ export class UserService {
     }
 
     const newUser = new User();
+    newUser.name = dto.name;
     newUser.email = dto.email;
     newUser.password = await hash(dto.password, 10);
 

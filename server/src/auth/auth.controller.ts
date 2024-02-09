@@ -1,7 +1,6 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from 'src/module/user/dto/user.dto';
 import { UserService } from 'src/module/user/user.service';
-import { LoginDto } from './dto/auth.dto';
+import { LoginDto , SignUpDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { RefreshJwtGuard } from './guards/refresh.guard';
 
@@ -13,7 +12,7 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  async registerUser(@Body() dto: CreateUserDto) {
+  async registerUser(@Body() dto: SignUpDto) {
     return await this.userService.create(dto);
   }
 
@@ -26,7 +25,6 @@ export class AuthController {
   @Post('refresh')
   async refreshToken(@Request() req) {
     console.log('refreshed');
-
     return await this.authService.refreshToken(req.user);
   }
 }

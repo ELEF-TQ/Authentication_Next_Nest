@@ -16,9 +16,9 @@ export class AuthService {
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto);
     const payload = {
-      username: user.email,
+      name: user.email,
       sub: {
-        name: user.username,
+        name: user.email,
       },
     };
 
@@ -26,7 +26,7 @@ export class AuthService {
       user,
       backendTokens: {
         accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '20s',
+          expiresIn: '1d',
           secret: process.env.jwtSecretKey,
         }),
         refreshToken: await this.jwtService.signAsync(payload, {
@@ -39,8 +39,7 @@ export class AuthService {
   }
 
   async validateUser(dto: LoginDto) {
-    const user = await this.userService.findByEmail(dto.username);
-
+    const user = await this.userService.findByEmail(dto.email);
     if (user && (await compare(dto.password, user.password))) {
       const { password, ...result } = user;
       return result;
@@ -50,13 +49,13 @@ export class AuthService {
 
   async refreshToken(user: any) {
     const payload = {
-      username: user.username,
+      email: user.email,
       sub: user.sub,
     };
 
     return {
       accessToken: await this.jwtService.signAsync(payload, {
-        expiresIn: '20s',
+        expiresIn: '1d',
         secret: process.env.jwtSecretKey,
       }),
       refreshToken: await this.jwtService.signAsync(payload, {

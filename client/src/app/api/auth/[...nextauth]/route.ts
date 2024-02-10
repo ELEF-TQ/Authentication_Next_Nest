@@ -1,4 +1,4 @@
-import { api } from "@/lib/constants";
+import { api } from "@/lib/Constants";
 import { NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import NextAuth from "next-auth/next";
@@ -70,6 +70,10 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
+  },
+
+  pages: {
+    signIn :"/signin"
   },
 };
 

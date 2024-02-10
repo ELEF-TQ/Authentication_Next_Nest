@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from "react";
-import { Button } from "@/components/shared/button";
+import { Button } from "@/components/Button";
 import InputBox from "@/components/InputBox";
-import { api } from "@/lib/constants";
+import { api } from "@/lib/Constants";
 import Link from "next/link";
 
 const SignupPage = () => {
